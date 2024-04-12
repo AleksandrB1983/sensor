@@ -28,6 +28,7 @@ public class CardDeliveryTest {
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
     }
+
     @BeforeEach
     void setup() {
         open("http:localhost:9999");
@@ -63,11 +64,12 @@ public class CardDeliveryTest {
                 .shouldHave(exactText("Встреча успешно запланирована на " + secondMeetingDate))
                 .shouldBe(visible);
     }
+
     @Test
     @DisplayName("Should get error message if entered wrong phone number")
     void shouldGetErrorIfWrongPhone() {
         $("[data-test-id='city'] input").setValue(validUser.getCity());
-        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT,Keys.HOME), Keys.BACK_SPACE);
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(firstMeetingDate);
         $("[data-test-id='name'] input").setValue(validUser.getName());
         $("[data-test-id='phone'] input").setValue(DataGenerator.generateWrongPhone("en"));
